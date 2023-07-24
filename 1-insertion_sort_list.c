@@ -8,65 +8,40 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *holder, *temp, *sorted, *unsorted, *head;
+	listint_t *holder, *head, *unsorted, *ahead, *behind, *current;
 
-	if (!list || !*list)
+	if (!list || !*list || !(*list)->next)
 		return;
 
-	head = sorted = *list;
-	if (sorted->next == NULL)
-		return;
-	unsorted = sorted->next;
+	head = *list;
+	unsorted = head->next;
 
 	while (unsorted)
 	{
-		if (sorted->n > unsorted->n)
+		holder = unsorted;
+		while (holder->prev && holder->n < holder->prev->n)
 		{
-			holder = unsorted;
-			unsorted = unsorted->next;
-			if (sorted->prev)
-				temp = sorted->prev;
-			swap_node(sorted, holder);
-			print_list(head);
+			current = holder;
+			behind = holder->prev;
+			ahead = holder->next;
+			current->prev = behind->prev;
+			current->next = behind;
 
-			while (temp && temp->prev && temp->n > holder->n)
-			{
-				swap_node(temp, holder);
-				print_list(head);
-				temp = holder->prev;
-			}
+			behind->prev = current;
+			behind->next = ahead;
 
-			if (!holder->prev)
-				head = holder;
+			if (current->prev)
+				current->prev->next = current;
+
+			if (behind == head)
+				*list = current;
+			if (ahead)
+				ahead->prev = behind;
+
+			print_list(*list);
+			holder = behind->prev;
 		}
-		else
-		{
-			sorted = sorted->next;
-			if (sorted)
-				unsorted = sorted->next;
-		}
+		unsorted = unsorted->next;
 	}
-	*list = holder;
 }
-/**
- * swap_node - swaps 2 nodes of a doubly linked list
- *
- * @node1: first node to swap
- * @node2: second node to swap
- * Return: nothing
- */
-void swap_node(listint_t *node1, listint_t *node2)
-{
-	listint_t *temp_prev = node1->prev;
-	listint_t *temp_next = node2->next;
 
-	if (temp_prev)
-		temp_prev->next = node2;
-	if (temp_next)
-		temp_next->prev = node1;
-
-	node1->prev = node2;
-	node1->next = temp_next;
-	node2->prev = temp_prev;
-	node2->next = node1;
-}
