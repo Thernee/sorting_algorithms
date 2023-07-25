@@ -27,14 +27,14 @@ void insertion_sort_list(listint_t **list)
 			current->prev = behind->prev;
 			current->next = behind;
 
+			if (behind->prev)
+				behind->prev->next = current;
+			else
+				*list = current;
+
 			behind->prev = current;
 			behind->next = ahead;
 
-			if (current->prev)
-				current->prev->next = current;
-
-			if (behind == head)
-				*list = current;
 			if (ahead)
 				ahead->prev = behind;
 
@@ -44,4 +44,3 @@ void insertion_sort_list(listint_t **list)
 		unsorted = unsorted->next;
 	}
 }
-
