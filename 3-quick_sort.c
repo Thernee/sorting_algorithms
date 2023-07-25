@@ -7,7 +7,7 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array|| size < 2)
+	if (!array || size < 2)
 		return;
 
 	sort_recursive(array, 0, size - 1, size);
@@ -81,4 +81,3 @@ void sort_recursive(int *array, int left, int right, size_t size)
 		sort_recursive(array, pivot + 1, right, size);
 	}
 }
-
