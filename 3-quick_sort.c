@@ -38,25 +38,25 @@ int lomuto_partition(int *array, int left, int right, size_t size)
 	int pivot, idx, j;
 
 
-	pivot = arr[right];
+	pivot = array[right];
 	idx = left - 1;
 
 	for (j = left; j < right; j++)
 	{
-		if (arr[j] < pivot)
+		if (array[j] < pivot)
 		{
 			idx++;
 			if (idx != j)
 			{
-				swap(&arr[idx], &arr[j]);
-				print_array(arr, size);
+				swap(&array[idx], &array[j]);
+				print_array(array, size);
 			}
 		}
 	}
 
 	/*placing pivot in the right spot*/
-	swap(&arr[idx + 1], &arr[right]);
-	print_array(arr, size);
+	swap(&array[idx + 1], &array[right]);
+	print_array(array, size);
 
 	return (idx + 1);
 }

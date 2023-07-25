@@ -29,6 +29,8 @@ void quick_sort(int *array, size_t size);
 
 /* HELPER FUNCTIONS PROTOTYPES:*/
 void swap_node(listint_t *node1, listint_t *node2);
-
+void swap(int *a, int *b);
+int lomuto_partition(int *array, int left, int right, size_t size);
+void sort_recursive(int *array, int left, int right, size_t size);
 
 #endif
