@@ -45,7 +45,7 @@ int lomuto_partition(int *array, int left, int right, size_t size)
 	{
 		if (array[j] < pivot)
 		{
-			if (idx != j)
+			if (idx != j && array[idx] != array[right])
 			{
 				swap(&array[idx], &array[j]);
 				print_array(array, size);
@@ -54,7 +54,7 @@ int lomuto_partition(int *array, int left, int right, size_t size)
 		}
 	}
 
-	if (idx != right)
+	if (idx != right && array[idx] != array[right])
 	{
 		swap(&array[idx], &array[right]);
 		print_array(array, size);
